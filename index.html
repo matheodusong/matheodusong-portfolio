@@ -10,40 +10,35 @@
 </head>
 <body>
 
-    <header>
+    <header class="header-main">
         <div class="logo" onclick="closeAll()">
-            <h1 class="text-xs tracking-[0.3em] font-medium uppercase">Matheo Dusong</h1>
+            <h1 class="text-xs tracking-[0.3em] font-medium uppercase text-white">Matheo Dusong</h1>
             <p class="text-[9px] text-neutral-500 uppercase mt-1">Industrial Designer</p>
         </div>
         <div class="nav-container">
-            <div onclick="openOverlay('#inquiries-page')" class="nav-link">Inquiries</div>
-            <div onclick="openOverlay('#info-page')" class="nav-link">Info</div>
+            <div onclick="openOverlay('#inquiries-page')" class="nav-link text-white hover:text-neutral-400">Inquiries</div>
+            <div onclick="openOverlay('#info-page')" class="nav-link text-white hover:text-neutral-400">Info</div>
         </div>
     </header>
 
     <!-- Main Grid View -->
     <div class="work-container" id="grid-view">
-        
         <div class="project-strip" onclick="openProject('Alumine', 'Technical Study', 'https://images.unsplash.com/photo-1544244015-0cd4b3ff569d?q=80&w=2000', 'https://images.unsplash.com/photo-1506152983158-b4a74a01c721?q=80&w=2000', 'https://images.unsplash.com/photo-1459156212016-c812468e2115?q=80&w=2000')">
             <img src="https://images.unsplash.com/photo-1544244015-0cd4b3ff569d?q=80&w=2000" class="project-img">
             <div class="project-label">01 // Alumine</div>
         </div>
-
         <div class="project-strip" onclick="openProject('RPR', 'CNC Fabrication', 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=2000', 'https://images.unsplash.com/photo-1508183393781-bc994c92bec1?q=80&w=2000', 'https://images.unsplash.com/photo-1543157145-f78c636d023d?q=80&w=2000')">
             <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=2000" class="project-img">
             <div class="project-label">02 // RPR</div>
         </div>
-
         <div class="project-strip" onclick="openProject('Mille-foil', 'Structure Design', 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=2000', 'https://images.unsplash.com/photo-1614165933393-0ec2a5940935?q=80&w=2000', 'https://images.unsplash.com/photo-1526170315870-ef6d82f583ad?q=80&w=2000')">
             <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=2000" class="project-img">
             <div class="project-label">03 // Mille-foil</div>
         </div>
-
         <div class="project-strip" onclick="openProject('Zéphyr', 'Aerodynamic Study', 'https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?q=80&w=2000', 'https://images.unsplash.com/photo-1533090161767-e6ffed986c88?q=80&w=2000', 'https://images.unsplash.com/photo-1503602642458-232111445657?q=80&w=2000')">
             <img src="https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?q=80&w=2000" class="project-img">
             <div class="project-label">04 // Zéphyr</div>
         </div>
-
         <div class="project-strip" onclick="openProject('Peony', 'Organic Form', 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=2000', 'https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?q=80&w=2000', 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=2000')">
             <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=2000" class="project-img">
             <div class="project-label">05 // Peony</div>
@@ -53,23 +48,37 @@
     <!-- Project Detail Page -->
     <div id="detail-page" class="overlay-page">
         <div class="max-w-[90vw] mx-auto pt-32 px-4">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-16">
-                <div class="lg:col-span-9 space-y-20">
+            <!-- Mobile: Column Flex | Desktop: Grid -->
+            <div class="flex flex-col lg:grid lg:grid-cols-12 gap-10 lg:gap-16">
+                
+                <!-- Main Image (First on mobile) -->
+                <div class="lg:col-span-9 order-1">
                     <img id="detail-img" src="" class="detail-main-img grayscale hover:grayscale-0 transition-all duration-1000">
-                    <img id="detail-img-1" src="" class="w-full opacity-60 hover:opacity-100 transition-opacity duration-700">
-                    <img id="detail-img-2" src="" class="w-full opacity-60 hover:opacity-100 transition-opacity duration-700">
                 </div>
-                <div class="lg:col-span-3 lg:sticky lg:top-32 self-start">
-                    <h2 id="detail-title" class="text-5xl font-light tracking-tighter uppercase mb-6 leading-none">Project Title</h2>
-                    <p id="detail-subtitle" class="spec-label mb-12 text-white border-b border-neutral-800 pb-6">Subtitle</p>
-                    <div class="space-y-12 text-neutral-400 text-sm leading-relaxed">
+
+                <!-- Text Info (Second on mobile, Sidebar on desktop) -->
+                <div class="lg:col-span-3 lg:sticky lg:top-32 self-start order-2">
+                    <h2 id="detail-title" class="text-4xl lg:text-5xl font-light tracking-tighter uppercase mb-6 leading-none text-white">Project Title</h2>
+                    <p id="detail-subtitle" class="spec-label mb-8 lg:mb-12 text-white border-b border-neutral-800 pb-6">Subtitle</p>
+                    <div class="space-y-8 lg:space-y-12 text-neutral-400 text-sm leading-relaxed">
                         <div>
                             <p class="spec-label mb-2">Objective</p>
-                            <p>Investigation into tactile relationships between raw materials and functional performance.</p>
+                            <p>Investigation into tactile relationships between raw materials and functional performance in high-stress environments.</p>
+                        </div>
+                        <div>
+                            <p class="spec-label mb-2">Materiality</p>
+                            <p>Anodized Aluminum, Borosilicate Glass, Machined Carbon Fiber.</p>
                         </div>
                     </div>
                 </div>
+
+                <!-- Extra Images (Last on mobile) -->
+                <div class="lg:col-span-9 space-y-10 lg:space-y-20 order-3">
+                    <img id="detail-img-1" src="" class="w-full opacity-80 lg:opacity-60 hover:opacity-100 transition-opacity duration-700">
+                    <img id="detail-img-2" src="" class="w-full opacity-80 lg:opacity-60 hover:opacity-100 transition-opacity duration-700">
+                </div>
             </div>
+
             <div class="scroll-spacer">
                 <p class="spec-label opacity-30 tracking-[0.5em]">Scroll to close</p>
                 <div class="h-24 w-[1px] bg-neutral-800 mt-6"></div>
@@ -77,22 +86,19 @@
         </div>
     </div>
 
-    <!-- Info Page -->
+    <!-- Info & Inquiries Pages (Restored) -->
     <div id="info-page" class="overlay-page">
         <div class="max-w-4xl mx-auto pt-48 px-10">
             <p class="spec-label mb-4">Profile</p>
-            <h2 class="text-4xl md:text-5xl font-light tracking-tighter mb-12">Matheo Dusong is a designer focusing on technical precision and industrial aesthetics.</h2>
-            <div class="scroll-spacer">
-                <p class="spec-label opacity-30 tracking-[0.5em]">Scroll to close</p>
-            </div>
+            <h2 class="text-4xl md:text-5xl font-light tracking-tighter mb-12 text-white">Matheo Dusong is a designer focusing on technical precision and industrial aesthetics.</h2>
+            <div class="scroll-spacer"></div>
         </div>
     </div>
 
-    <!-- Inquiries Page -->
     <div id="inquiries-page" class="overlay-page">
         <div class="max-w-4xl mx-auto pt-48 px-10 text-center">
             <p class="spec-label mb-4">Contact</p>
-            <h2 class="text-4xl md:text-6xl font-light tracking-tighter mb-20">
+            <h2 class="text-4xl md:text-6xl font-light tracking-tighter mb-20 text-white">
                 <a href="mailto:hello@matheodusong.com">hello@matheodusong.com</a>
             </h2>
             <div class="scroll-spacer"></div>

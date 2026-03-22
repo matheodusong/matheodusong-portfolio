@@ -1,53 +1,40 @@
-/* Custom resets and fonts */
 body, html {
     margin: 0; padding: 0; height: 100%;
+    background-color: #050505; color: #fff;
     font-family: 'IBM Plex Mono', monospace;
-    background-color: #050505;
+    overflow: hidden;
 }
 
-/* --- RESPONSIVE GRID VIEW --- */
+/* --- GRID VIEW --- */
 .work-container {
     display: flex; 
-    flex-direction: column; /* Mobile first: vertical stack */
-    height: 100vh; 
-    width: 100vw;
+    flex-direction: column; /* Mobile: Stacks vertically */
+    height: 100vh; width: 100vw;
     transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @media (min-width: 768px) {
-    .work-container {
-        flex-direction: row; /* Desktop: side-by-side strips */
-    }
+    .work-container { flex-direction: row; } /* Desktop: Side-by-side */
 }
 
 .project-strip {
-    position: relative; 
-    flex: 1; 
-    overflow: hidden;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    position: relative; flex: 1; overflow: hidden;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     transition: flex 0.8s cubic-bezier(0.16, 1, 0.3, 1);
     cursor: pointer;
 }
 
 @media (min-width: 768px) {
-    .project-strip {
-        border-bottom: none;
-        border-right: 1px solid rgba(255, 255, 255, 0.1);
-    }
+    .project-strip { border-bottom: none; border-right: 1px solid rgba(255, 255, 255, 0.1); }
     .project-strip:hover { flex: 4; }
 }
 
 .project-img {
     position: absolute; top: 0; left: 0;
     width: 100%; height: 100%; object-fit: cover;
-    filter: blur(20px); transform: scale(1.1);
+    filter: blur(40px); transform: scale(1.1);
     transition: filter 1.2s ease, transform 1.2s ease, opacity 0.8s ease;
-    opacity: 0.3;
-}
-
-/* On mobile, images are slightly more visible */
-@media (max-width: 767px) {
-    .project-img { filter: blur(10px); opacity: 0.4; }
+    opacity: 0.4;
 }
 
 .project-strip:hover .project-img {
@@ -55,11 +42,9 @@ body, html {
 }
 
 .project-label {
-    position: absolute; 
-    bottom: 20px; left: 20px;
+    position: absolute; bottom: 20px; left: 20px;
     font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
-    white-space: nowrap; opacity: 0.7;
-    z-index: 10;
+    white-space: nowrap; opacity: 0.5;
 }
 
 @media (min-width: 768px) {
@@ -79,32 +64,25 @@ body, html {
     overflow-y: auto;
     font-family: 'Inter', sans-serif;
     scrollbar-width: none;
-}
-.overlay-page::-webkit-scrollbar { display: none; }
-
-.spec-label { 
-    font-family: 'IBM Plex Mono'; 
-    font-size: 10px; 
-    color: #666; 
-    text-transform: uppercase; 
-    letter-spacing: 0.1em;
+    pointer-events: none; /* FIX: Clicks pass through to grid when closed */
 }
 
-.scroll-spacer { 
-    height: 40vh; 
-    display: flex; 
-    flex-direction: column;
-    align-items: center; 
-    justify-content: center;
+.overlay-page.is-open {
+    pointer-events: auto; /* FIX: Clicks work when open */
 }
 
-.detail-main-img {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-    aspect-ratio: 4/5; /* Portrait on mobile */
+header {
+    position: fixed; top: 0; left: 0; width: 100%;
+    padding: 30px; z-index: 2000;
+    display: flex; justify-content: space-between;
+    pointer-events: none; /* Pass clicks to background */
 }
 
-@media (min-width: 768px) {
-    .detail-main-img { aspect-ratio: 16 / 9; }
-}
+.logo, .nav-container { pointer-events: auto; }
+.nav-container { display: flex; gap: 2rem; }
+.nav-link { cursor: pointer; text-transform: uppercase; font-size: 10px; letter-spacing: 0.1em; }
+
+.spec-label { font-family: 'IBM Plex Mono'; font-size: 10px; color: #666; text-transform: uppercase; }
+
+.scroll-spacer { height: 105vh; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; padding-top: 20vh; }
+.detail-main-img { width: 100%; height: auto; object-fit: cover; aspect-ratio: 16 / 9; }

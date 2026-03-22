@@ -4,156 +4,74 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Matheo Dusong | Industrial Design</title>
+    
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400&family=Inter:wght@300;400&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <style>
-        body, html {
-            margin: 0; padding: 0; height: 100%;
-            background-color: #050505; color: #fff;
-            font-family: 'IBM+Plex+Mono', monospace;
-            overflow: hidden;
-        }
-
-        /* --- GRID VIEW --- */
-        .work-container {
-            display: flex; height: 100vh; width: 100vw;
-            align-items: stretch; transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .project-strip {
-            position: relative; flex: 1; overflow: hidden;
-            border-right: 1px solid rgba(255, 255, 255, 0.1);
-            transition: flex 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-            cursor: pointer;
-        }
-
-        .project-img {
-            position: absolute; top: 0; left: 0;
-            width: 100%; height: 100%; object-fit: cover;
-            filter: blur(40px); transform: scale(1.1);
-            transition: filter 1.2s ease, transform 1.2s ease, opacity 0.8s ease;
-            opacity: 0.4;
-        }
-
-        .project-strip:hover { flex: 4; }
-        .project-strip:hover .project-img {
-            filter: blur(0px); transform: scale(1); opacity: 1;
-        }
-
-        .project-label {
-            position: absolute; bottom: 40px; left: 20px;
-            transform: rotate(-90deg) translateX(40px);
-            transform-origin: left bottom;
-            font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
-            white-space: nowrap; opacity: 0.5;
-        }
-
-        /* --- OVERLAYS --- */
-        .overlay-page {
-            position: fixed; top: 0; left: 0;
-            width: 100%; height: 100vh;
-            background: #0a0a0a; z-index: 1000;
-            transform: translateY(100%); 
-            overflow-y: auto;
-            font-family: 'Inter', sans-serif;
-            scrollbar-width: none;
-        }
-        .overlay-page::-webkit-scrollbar { display: none; }
-
-        header {
-            position: fixed; top: 0; left: 0; width: 100%;
-            padding: 30px; z-index: 2000;
-            display: flex; justify-content: space-between;
-        }
-
-        .logo { pointer-events: auto; cursor: pointer; }
-        .nav-link { cursor: pointer; transition: color 0.3s; position: relative; z-index: 2001; }
-        
-        .spec-label { font-family: 'IBM+Plex+Mono'; font-size: 10px; color: #666; text-transform: uppercase; }
-        
-        .scroll-spacer { 
-            height: 105vh; 
-            display: flex; 
-            flex-direction: column;
-            align-items: center; 
-            justify-content: flex-start;
-            padding-top: 20vh;
-        }
-
-        .detail-main-img {
-            width: 100%;
-            height: auto;
-            object-fit: cover;
-            aspect-ratio: 16 / 9;
-        }
-    </style>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body class="bg-[#050505] text-white overflow-hidden">
 
-    <header>
-        <div class="logo" onclick="closeAll()">
+    <header class="fixed top-0 left-0 w-full p-6 md:p-10 z-[2000] flex justify-between items-start pointer-events-none">
+        <div class="logo pointer-events-auto cursor-pointer" onclick="closeAll()">
             <h1 class="text-xs tracking-[0.3em] font-medium uppercase">Matheo Dusong</h1>
             <p class="text-[9px] text-neutral-500 uppercase mt-1">Industrial Designer</p>
         </div>
-        <div class="flex space-x-8 text-[10px] uppercase tracking-widest pointer-events-auto">
-            <div onclick="openOverlay('#inquiries-page')" class="nav-link hover:text-neutral-400">Inquiries</div>
-            <div onclick="openOverlay('#info-page')" class="nav-link hover:text-neutral-400">Info</div>
+        <div class="flex space-x-6 md:space-x-8 text-[10px] uppercase tracking-widest pointer-events-auto">
+            <div onclick="openOverlay('#inquiries-page')" class="nav-link hover:text-neutral-400 cursor-pointer">Inquiries</div>
+            <div onclick="openOverlay('#info-page')" class="nav-link hover:text-neutral-400 cursor-pointer">Info</div>
         </div>
     </header>
 
     <!-- Main Grid View -->
-    <div class="work-container" id="grid-view">
-        
-        <!-- PROJECT 1: ALUMINE -->
+    <main class="work-container" id="grid-view">
+        <!-- PROJECT 1 -->
         <div class="project-strip" onclick="openProject('Alumine', 'Technical Study', 'https://images.unsplash.com/photo-1544244015-0cd4b3ff569d?q=80&w=2000', 'https://images.unsplash.com/photo-1506152983158-b4a74a01c721?q=80&w=2000', 'https://images.unsplash.com/photo-1459156212016-c812468e2115?q=80&w=2000')">
-            <img src="https://images.unsplash.com/photo-1544244015-0cd4b3ff569d?q=80&w=2000" class="project-img">
+            <img src="https://images.unsplash.com/photo-1544244015-0cd4b3ff569d?q=80&w=2000" class="project-img" alt="Alumine">
             <div class="project-label">01 // Alumine</div>
         </div>
 
-        <!-- PROJECT 2: RPR -->
+        <!-- PROJECT 2 -->
         <div class="project-strip" onclick="openProject('RPR', 'CNC Fabrication', 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=2000', 'https://images.unsplash.com/photo-1508183393781-bc994c92bec1?q=80&w=2000', 'https://images.unsplash.com/photo-1543157145-f78c636d023d?q=80&w=2000')">
-            <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=2000" class="project-img">
+            <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=2000" class="project-img" alt="RPR">
             <div class="project-label">02 // RPR</div>
         </div>
 
-        <!-- PROJECT 3: MILLE-FOIL -->
+        <!-- PROJECT 3 -->
         <div class="project-strip" onclick="openProject('Mille-foil', 'Structure Design', 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=2000', 'https://images.unsplash.com/photo-1614165933393-0ec2a5940935?q=80&w=2000', 'https://images.unsplash.com/photo-1526170315870-ef6d82f583ad?q=80&w=2000')">
-            <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=2000" class="project-img">
+            <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=2000" class="project-img" alt="Mille-foil">
             <div class="project-label">03 // Mille-foil</div>
         </div>
 
-        <!-- PROJECT 4: ZÉPHYR -->
+        <!-- PROJECT 4 -->
         <div class="project-strip" onclick="openProject('Zéphyr', 'Aerodynamic Study', 'https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?q=80&w=2000', 'https://images.unsplash.com/photo-1533090161767-e6ffed986c88?q=80&w=2000', 'https://images.unsplash.com/photo-1503602642458-232111445657?q=80&w=2000')">
-            <img src="https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?q=80&w=2000" class="project-img">
+            <img src="https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?q=80&w=2000" class="project-img" alt="Zéphyr">
             <div class="project-label">04 // Zéphyr</div>
         </div>
 
-        <!-- PROJECT 5: PEONY -->
+        <!-- PROJECT 5 -->
         <div class="project-strip" onclick="openProject('Peony', 'Organic Form', 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=2000', 'https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?q=80&w=2000', 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=2000')">
-            <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=2000" class="project-img">
+            <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=2000" class="project-img" alt="Peony">
             <div class="project-label">05 // Peony</div>
         </div>
+    </main>
 
-    </div>
+    <!-- UI: Close Button (Visible on overlays) -->
+    <button id="close-btn" onclick="closeAll()" class="fixed top-8 right-8 z-[3000] text-[10px] uppercase tracking-[0.3em] opacity-0 pointer-events-none transition-opacity duration-300 hover:text-neutral-400">
+        Close [esc]
+    </button>
 
     <!-- Project Detail Page -->
     <div id="detail-page" class="overlay-page">
-        <div class="max-w-[90vw] mx-auto pt-32 px-4">
-            <div class="grid grid-cols-1 md:grid-cols-12 gap-16">
-                
-                <!-- Main Content (Images) -->
-                <div class="md:col-span-9 space-y-20">
-                    <img id="detail-img" src="" alt="Project Image" class="detail-main-img grayscale hover:grayscale-0 transition-all duration-1000">
-                    <img id="detail-img-1" src="" class="w-full opacity-60 hover:opacity-100 transition-opacity duration-700">
-                    <img id="detail-img-2" src="" class="w-full opacity-60 hover:opacity-100 transition-opacity duration-700">
-                </div>
-
-                <!-- Sidebar (Info) -->
-                <div class="md:col-span-3 sticky top-32 self-start">
-                    <h2 id="detail-title" class="text-5xl font-light tracking-tighter uppercase mb-6 leading-none">Project Title</h2>
-                    <p id="detail-subtitle" class="spec-label mb-12 text-white border-b border-neutral-800 pb-6">Subtitle</p>
-                    <div class="space-y-12 text-neutral-400 text-sm leading-relaxed">
+        <div class="max-w-[95vw] md:max-w-[90vw] mx-auto pt-32 px-4">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
+                <!-- Sidebar (Info) - Moved to top for mobile -->
+                <div class="lg:col-span-3 lg:sticky lg:top-32 self-start order-2 lg:order-1">
+                    <h2 id="detail-title" class="text-4xl md:text-5xl font-light tracking-tighter uppercase mb-6 leading-none">Project Title</h2>
+                    <p id="detail-subtitle" class="spec-label mb-8 md:mb-12 text-white border-b border-neutral-800 pb-6">Subtitle</p>
+                    <div class="space-y-8 md:space-y-12 text-neutral-400 text-sm leading-relaxed">
                         <div>
                             <p class="spec-label mb-2">Objective</p>
                             <p>Investigation into tactile relationships between raw materials and functional performance in high-stress environments.</p>
@@ -164,10 +82,15 @@
                         </div>
                     </div>
                 </div>
+                <!-- Main Content (Images) -->
+                <div class="lg:col-span-9 space-y-10 md:space-y-20 order-1 lg:order-2">
+                    <img id="detail-img" src="" alt="Project" class="detail-main-img grayscale hover:grayscale-0 transition-all duration-1000">
+                    <img id="detail-img-1" src="" class="w-full opacity-80 md:opacity-60 hover:opacity-100 transition-opacity duration-700" alt="Detail 1">
+                    <img id="detail-img-2" src="" class="w-full opacity-80 md:opacity-60 hover:opacity-100 transition-opacity duration-700" alt="Detail 2">
+                </div>
             </div>
-
             <div class="scroll-spacer">
-                <p class="spec-label opacity-30 tracking-[0.5em]">Scroll to close</p>
+                <p class="spec-label opacity-30 tracking-[0.5em]">End of project</p>
                 <div class="h-24 w-[1px] bg-neutral-800 mt-6"></div>
             </div>
         </div>
@@ -177,15 +100,12 @@
     <div id="info-page" class="overlay-page">
         <div class="max-w-4xl mx-auto pt-48 px-10">
             <p class="spec-label mb-4">Profile</p>
-            <h2 class="text-5xl font-light tracking-tighter mb-12">Matheo Dusong is a designer focusing on technical precision and industrial aesthetics.</h2>
-            <div class="grid grid-cols-2 gap-20 text-neutral-400 leading-relaxed">
+            <h2 class="text-3xl md:text-5xl font-light tracking-tighter mb-12">Matheo Dusong is a designer focusing on technical precision and industrial aesthetics.</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-20 text-neutral-400 leading-relaxed">
                 <p>Based in Europe, working globally on projects ranging from consumer electronics to furniture.</p>
                 <p>Specialized in CMF and mechanical design, bridging the gap between engineering and art.</p>
             </div>
-            <div class="scroll-spacer">
-                <p class="spec-label opacity-30 tracking-[0.5em]">Scroll to close</p>
-                <div class="h-20 w-[1px] bg-neutral-800 mt-6"></div>
-            </div>
+            <div class="scroll-spacer"></div>
         </div>
     </div>
 
@@ -193,69 +113,15 @@
     <div id="inquiries-page" class="overlay-page">
         <div class="max-w-4xl mx-auto pt-48 px-10 text-center">
             <p class="spec-label mb-4">Contact</p>
-            <h2 class="text-6xl font-light tracking-tighter mb-20 hover:text-neutral-500 transition-colors">
+            <h2 class="text-3xl md:text-6xl font-light tracking-tighter mb-20 hover:text-neutral-500 transition-colors">
                 <a href="mailto:hello@matheodusong.com">hello@matheodusong.com</a>
             </h2>
-            <div class="scroll-spacer">
-                <p class="spec-label opacity-30 tracking-[0.5em]">Scroll to close</p>
-                <div class="h-20 w-[1px] bg-neutral-800 mt-6"></div>
-            </div>
+            <div class="scroll-spacer"></div>
         </div>
     </div>
 
-    <script>
-        let isTransitioning = false;
-        let activeOverlay = null;
-
-        function openProject(title, subtitle, mainImg, secImg1, secImg2) {
-            document.getElementById('detail-title').innerText = title;
-            document.getElementById('detail-subtitle').innerText = subtitle;
-            document.getElementById('detail-img').src = mainImg;
-            document.getElementById('detail-img-1').src = secImg1;
-            document.getElementById('detail-img-2').src = secImg2;
-            openOverlay('#detail-page');
-        }
-
-        function openOverlay(id) {
-            if (isTransitioning) return;
-            if (activeOverlay && activeOverlay !== id) {
-                gsap.to(activeOverlay, { y: "100%", duration: 0.5, ease: "power2.in" });
-            }
-            activeOverlay = id;
-            isTransitioning = true;
-            const target = document.querySelector(id);
-            target.scrollTop = 0; 
-            gsap.to(id, {
-                y: "0%",
-                duration: 1,
-                ease: "power4.inOut",
-                onComplete: () => { isTransitioning = false; }
-            });
-            gsap.to("#grid-view", { scale: 0.95, opacity: 0, duration: 1, ease: "power4.inOut" });
-        }
-
-        function closeAll() {
-            if (isTransitioning) return;
-            isTransitioning = true;
-            activeOverlay = null;
-            gsap.to(".overlay-page", {
-                y: "100%",
-                duration: 0.8,
-                ease: "power4.inOut",
-                onComplete: () => { isTransitioning = false; }
-            });
-            gsap.to("#grid-view", { scale: 1, opacity: 1, duration: 0.8, ease: "power4.inOut" });
-        }
-
-        document.querySelectorAll('.overlay-page').forEach(page => {
-            page.addEventListener('scroll', () => {
-                if (isTransitioning) return;
-                const isAtBottom = page.scrollTop + page.clientHeight >= page.scrollHeight - 5;
-                if (isAtBottom && page.scrollTop > 50) {
-                    closeAll();
-                }
-            });
-        });
-    </script>
+    <!-- GSAP Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="js/main.js"></script>
 </body>
 </html>

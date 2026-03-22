@@ -22,7 +22,7 @@ function openOverlay(id) {
     isTransitioning = true;
     const target = document.querySelector(id);
     target.scrollTop = 0; 
-    target.classList.add('is-open'); // Enable pointer events
+    target.classList.add('is-open');
 
     gsap.to(id, {
         y: "0%",
@@ -45,14 +45,13 @@ function closeAll() {
         ease: "power4.inOut",
         onComplete: () => { 
             isTransitioning = false; 
-            target.classList.remove('is-open'); // Disable pointer events
+            target.classList.remove('is-open');
             activeOverlay = null;
         }
     });
     gsap.to("#grid-view", { scale: 1, opacity: 1, duration: 0.8, ease: "power4.inOut" });
 }
 
-// Scroll-to-close logic
 document.querySelectorAll('.overlay-page').forEach(page => {
     page.addEventListener('scroll', () => {
         if (isTransitioning) return;
